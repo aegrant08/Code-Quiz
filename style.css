@@ -1,0 +1,20 @@
+/* Global styling */
+
+/* container styling */
+.container {
+    margin: 45px 45px 45px 45px;
+    text-align: justify;
+}
+
+/* button styling */
+.btn {
+    background-color: #150485;
+    color: #ffffff;
+    border: 2px solid #150485;
+    border-radius: 7px;
+}
+
+
+    /* styling buttons */
+    /* styling question number headers */
+    /* styling containers with code questions; borders, padding, etc. */
