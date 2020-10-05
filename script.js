@@ -67,7 +67,6 @@ var buttons = document.getElementById("buttons")
 var end = document.getElementById("end")
 var restart = document.getElementById("restart")
 var currentQuestion = 0;
-var countdown = document.getElementById("countdown")
 var winners = [];
 var highScoresList = document.getElementById("scoreboard")
 
@@ -85,6 +84,7 @@ function displayQuestion() {
     btnB.innerHTML = quizQuestions[currentQuestion].b
     btnC.innerHTML = quizQuestions[currentQuestion].c
     btnD.innerHTML = quizQuestions[currentQuestion].d
+
 }
 
 // function to go to next question
@@ -106,18 +106,16 @@ function resetQuiz() {
 }
 
 // quiz timer - need to get this to print to top of page and show countdown
-window.onload = function timer() {
-    var secs = 0;
-    var id = setInterval(function timer() {
-        secs++;
-        if (secs >= 0) {
-            clearInterval(id);
-            alert("Time's Up!");
-            resetQuiz();
-        }
-    }, 100000);
-    countdown.innerHTML = "Time: " + secs++;
-}
+var timeLeft = 45;
+var countdownTimer = setInterval(function () {
+    if (timeLeft <= 0) {
+        clearInterval(countdownTimer);
+        document.getElementById("countdown").innerHTML = "Finished";
+    } else {
+        document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
+    }
+    timeLeft -= 1;
+}, 1000);
 
 // function to post initials and high scores to score board
 function addingScore() {
