@@ -60,6 +60,7 @@ var btnC = document.getElementById("c")
 var btnD = document.getElementById("d")
 var start = document.getElementById("start")
 var reset = document.getElementById("reset")
+var next = document.getElementById("next")
 var post = document.getElementById("post")
 var clear = document.getElementById("clear")
 var startPage = document.getElementById("start-page")
@@ -69,6 +70,8 @@ var restart = document.getElementById("restart")
 var currentQuestion = 0;
 var winners = [];
 var highScoresList = document.getElementById("scoreboard")
+var timeLeft = 45;
+var score = 0;
 
 
 // function to start quiz
@@ -85,13 +88,23 @@ function displayQuestion() {
     btnC.innerHTML = quizQuestions[currentQuestion].c
     btnD.innerHTML = quizQuestions[currentQuestion].d
 
+    // quiz timer to start when start button clicked, reset with 
+    var countdownTimer = setInterval(function () {
+        if (timeLeft <= 0) {
+            clearInterval(countdownTimer);
+            document.getElementById("countdown").innerHTML = "Finished";
+        } else {
+            document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
+        }
+        timeLeft -= 1;
+    }, 1000);
 }
 
 // function to go to next question
 function nextQuestion() {
     if (currentQuestion === quizQuestions.length - 1) {
-        buttons.classList.add("d-none")
-        end.classList.remove("d-none")
+        buttons.classList.add("d-none");
+        end.classList.remove("d-none");
         return
     }
     currentQuestion += 1
@@ -105,17 +118,17 @@ function resetQuiz() {
     end.classList.add("d-none")
 }
 
-// quiz timer - need to get this to print to top of page and show countdown
-var timeLeft = 45;
-var countdownTimer = setInterval(function () {
-    if (timeLeft <= 0) {
-        clearInterval(countdownTimer);
-        document.getElementById("countdown").innerHTML = "Finished";
-    } else {
-        document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
-    }
-    timeLeft -= 1;
-}, 1000);
+function wrongAnswer() {
+    timeLeft -= 10
+    nextQuestion()
+}
+
+function rightAnswer() {
+    score += 2
+    nextQuestion()
+}
+
+
 
 // function to post initials and high scores to score board
 function addingScore() {
@@ -137,6 +150,7 @@ start.addEventListener("click", displayQuestion);
 reset.addEventListener("click", resetQuiz);
 post.addEventListener("click", addingScore);
 clear.addEventListener("click", clearScores);
+next.addEventListener("click", nextQuestion);
 btnA.addEventListener("click", nextQuestion);
 btnB.addEventListener("click", nextQuestion);
 btnC.addEventListener("click", nextQuestion);
