@@ -7,7 +7,7 @@ var quizQuestions = [
         b: "Booleans",
         c: "Alerts",
         d: "Numbers",
-        answer: "C"
+        answer: "c"
     },
 
     {
@@ -17,7 +17,7 @@ var quizQuestions = [
         b: "Curly brackets",
         c: "Parentheses",
         d: "Square brackets",
-        answer: "C"
+        answer: "c"
     },
 
     {
@@ -27,7 +27,7 @@ var quizQuestions = [
         b: "Other Arrays",
         c: "Booleans",
         d: "All of the above",
-        answer: "D"
+        answer: "d"
     },
 
     {
@@ -37,7 +37,7 @@ var quizQuestions = [
         b: "Curly brackets",
         c: "Quotes",
         d: "Parentheses",
-        answer: "C"
+        answer: "c"
     },
 
     {
@@ -47,7 +47,7 @@ var quizQuestions = [
         b: "Javascript",
         c: "Terminal/bash",
         d: "For loops",
-        answer: "A"
+        answer: "a"
     },
 ];
 
@@ -68,8 +68,7 @@ var buttons = document.getElementById("buttons")
 var end = document.getElementById("end")
 var restart = document.getElementById("restart")
 var currentQuestion = 0;
-var winners = [];
-var highScoresList = document.getElementById("scoreboard")
+var scoreboard = document.getElementById("scoreboard")
 var timeLeft = 45;
 var score = 0;
 
@@ -118,17 +117,31 @@ function resetQuiz() {
     end.classList.add("d-none")
 }
 
-function wrongAnswer() {
-    timeLeft -= 10
-    nextQuestion()
+function userAnswer() {
+    if (quizQuestions[currentQuestion].value != quizQuestions[currentQuestion].answer) {
+        alert("Wrong answer! 10 seconds deducted from timer!")
+        timeLeft -= 10
+        nextQuestion()
+    } else {
+        alert("Correct answer! 2 points added to score!")
+        score += 2
+        nextQuestion()
+    }
 }
 
-function rightAnswer() {
-    score += 2
-    nextQuestion()
-}
+// function rightAnswer() {
+//     alert("Correct answer! 2 points added to score!")
+//     score += 2
+//     nextQuestion()
+// }
 
-
+// var with empty array for scoreboard
+var winners = []
+console.log(typeof winners);
+// saving scores to local storage
+localStorage.setItem("winners", JSON.stringify("winners"));
+// retrieving scores from local storage
+var highscores = JSON.parse(window.localStorage.getItem("winners")) || [];
 
 // function to post initials and high scores to score board
 function addingScore() {
@@ -137,12 +150,12 @@ function addingScore() {
     li.id = winners.length
     li.innerHTML = newScore
     winners.push(newScore);
-    highScoresList.append(li);
+    scoreboard.append(li);
 }
 
 // function to clear the high scores -- doesn't work - need to fix
-function clearScores(winners) {
-    winners.length = 0;
+function clearScores() {
+    localStorage.clear()
 }
 
 // button event listeners
@@ -150,11 +163,10 @@ start.addEventListener("click", displayQuestion);
 reset.addEventListener("click", resetQuiz);
 post.addEventListener("click", addingScore);
 clear.addEventListener("click", clearScores);
-next.addEventListener("click", nextQuestion);
-btnA.addEventListener("click", nextQuestion);
-btnB.addEventListener("click", nextQuestion);
-btnC.addEventListener("click", nextQuestion);
-btnD.addEventListener("click", nextQuestion);
+btnA.addEventListener("click", userAnswer, nextQuestion);
+btnB.addEventListener("click", userAnswer, nextQuestion);
+btnC.addEventListener("click", userAnswer, nextQuestion);
+btnD.addEventListener("click", userAnswer, nextQuestion);
 
 
 // restart button to restart quiz
@@ -162,24 +174,3 @@ restart.addEventListener("click", function (e) {
     location.reload();
 }, false);
 // event object .target .value to compare with answer for question maybe using if / else statements
-
-
-
-// iteration 2
-// letting user know whether answer is correct or not
-// if / else statements to compare answers and update score
-// display score at end of quiz
-
-// iteration 3
-// when user clicks start button the timer starts
-// if / else statement to reduce time if incorrect answer selected
-// add functionality if time is zero the quiz ends and user is taken to end page
-
-// iteration 4
-// add to end screen the highscores table
-// current score added to highscores
-// textbox for user to enter initials to post to scoreboard
-
-// iteration 5
-// persisting data - highscore data should show when page is refreshed
-// use local storage to save highscore data
