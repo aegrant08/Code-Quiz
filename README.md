@@ -8,7 +8,7 @@ Start Page
 
 The first page of the quiz provides the user with the rules and the quiz and timer starts when the user clicks the start button.
 
-![Start Page](assets/screen-shots/1-Landing-Page.png?raw=true)
+![Start Page](assets/screen-shots/1-Start-Page.png?raw=true)
 
 Question Pages
 
