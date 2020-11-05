@@ -12,7 +12,11 @@ The first page of the quiz provides the user with the rules and the quiz and tim
 
 Question Pages
 
-The user reads through the questions and then selects the correct answer. If they select the correct answer, they will receive an alert saying the answer is correct and points will be added to their score. If they select the wrong answer, they will receive an alert saying the answer is incorrect and 10 seconds will be deducted from their time. If the timer runs out before they are done with the quiz, the quiz is over. The reset button above each question will take the user back to Question 1 and reset the timer.
+The user reads through the questions and then selects the correct answer. 
+
+![Question Page](assets/screen-shots/2-Question-Page.png?raw=true)
+
+If they select the correct answer, they will receive an alert saying the answer is correct and points will be added to their score. If they select the wrong answer, they will receive an alert saying the answer is incorrect and 10 seconds will be deducted from their time. If the timer runs out before they are done with the quiz, the quiz is over. The reset button above each question will take the user back to Question 1 and reset the timer.
 
 Score Page
 
