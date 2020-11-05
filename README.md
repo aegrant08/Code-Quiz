@@ -25,3 +25,5 @@ If the timer runs out before they are done with the quiz, the quiz is over. The 
 Score Page
 
 At the end of the quiz, the user will be able to input their initials and score in the textbox and add them to the highscores scoreboard. The scores are stored in local storage. The restart button will take the user back to the Start Page to restart the quiz.
+
+![High Scores](assets/screen-shots/4-High-Scores.png?raw=true)
